@@ -14,7 +14,6 @@ import org.apache.ignite.IgniteCache;
 import org.apache.ignite.cache.CachePeekMode;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 
 import com.sun.jersey.api.client.Client;
@@ -57,7 +56,7 @@ public class RestLoader<T> {
 	
 	long id_counter = 1L;
 	
-	final String API_KEY = "Basic SECRET_PRIVATE_DATA_SORRY";
+	// final String API_KEY = "Basic SECRET_PRIVATE_DATA_SORRY"; // <-- put your own FreshDesk API Key here...
 
 	// Ignite cache of the appropriate class - key is always Long
 	protected IgniteCache<Long, T> cache;
@@ -164,7 +163,13 @@ public class RestLoader<T> {
 //				System.out.println(output); // can be checked as a String
 
 				GenericType<Collection<T>> type = getParameterizedCollectionType();
-				Collection<T> entities = response.getEntity(type);
+
+				Collection<T> entities = null;
+				try {
+					entities = response.getEntity(type);
+				} catch (Exception ex) {
+					bLoadMore = false;
+				}
 
 				if (entities != null) {
 					System.out.printf(" Entities loaded: %s\n", entities.size());

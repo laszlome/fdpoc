@@ -1,8 +1,9 @@
 package fdpoc;
 
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import fdpoc.model.*;
 import org.apache.ignite.Ignite;
@@ -25,9 +26,9 @@ import fdpoc.RestLoader.UPDATE_MODE;
 public class PocApp {
 
 	/* Timer interval for updates */
-	final static int UPDATE_FIRSTDELAY = 1000 ; // 1 second
-	final static int UPDATE_INTERVAL = 1000 * 60 * 5; // 5 minutes
-	final static int UPDATE_OVERLAP = 1000 * 60 * 1; // 5 minutes
+	final static int UPDATE_FIRSTDELAY = 5 ; // 5 seconds
+	final static int UPDATE_INTERVAL =  300; // 5 minutes
+	final static int UPDATE_OVERLAP = 300; // 5 minutes
 	
 	/* A date before we started to use FreshDesk */
 	static final DateTime BEGINNING_OF_TIME = new DateTime("2015-01-01T00:00:00Z");
@@ -105,16 +106,11 @@ public class PocApp {
 		
 		performUpdate(loader);
 		
-		// run first update just after loading everything then every UPDATE_INTERVAL minutes
-		new Timer().schedule(new TimerTask() {
-			@Override
-			public void run() {
-				runUpdate();
-			}
-		}, UPDATE_FIRSTDELAY, UPDATE_INTERVAL);
-
+		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+		executor.scheduleAtFixedRate(() -> runUpdate(), UPDATE_FIRSTDELAY, UPDATE_INTERVAL, TimeUnit.SECONDS);
 	}
-	
+
+
 	/**
 	 * Update tickets
 	 */
