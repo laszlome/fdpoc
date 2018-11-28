@@ -56,7 +56,7 @@ public class RestLoader<T> {
 	
 	long id_counter = 1L;
 	
-	// final String API_KEY = "Basic SECRET_PRIVATE_DATA_SORRY"; // <-- put your own FreshDesk API Key here...
+	final String API_KEY = "Basic SECRET_PRIVATE_DATA_SORRY"; // <-- put your own FreshDesk API Key here...
 
 	// Ignite cache of the appropriate class - key is always Long
 	protected IgniteCache<Long, T> cache;
