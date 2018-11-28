@@ -1,10 +1,11 @@
 # fdpoc
 
-This simple project reads all tickets from your FreshDesk account using its REST interface and builds an in-memory database of the data.
-It then can be reached via jdbc, so SQL notebooks like Zeppelin can generate charts using simple SQL.
+This simple project, based on Apache Iginte, reads all tickets from an existing FreshDesk account using FreshDesk's public REST API and builds an in-memory database of the data. It then can be reached via jdbc, so SQL notebooks like Apache Zeppelin can generate charts using simple SQL.
 
-Some restrictons apply to this REST interface:
-- only 100 tickets can be read at once
+Some restrictions apply to this REST interface:
+- Only 100 tickets can be read at once
 - More tickets must be loaded using further calls
 
-Some images of the UI (Zeppelin) can be found here (to added).
+Apache Ignite is an easy solution - using the built-in H2 database, queries are made easy.
+
+[Example screenshot of the data (anonymised)](https://photos.app.goo.gl/ZRSv9wF7wC5GfAJu8)
