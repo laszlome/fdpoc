@@ -12,3 +12,4 @@ Some restrictions apply to this REST interface:
 
 Clone and build using e.g. **mvn clean install**
 
+Requires a working API key for FreshDesk - to be set in class **RestLoader**.
