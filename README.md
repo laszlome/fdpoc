@@ -8,6 +8,4 @@ Some restrictions apply to this REST interface:
 - Only 100 tickets can be read at once
 - More tickets must be loaded using further calls
 
-Apache Ignite is an easy solution - using the built-in H2 database, queries are made easy.
-
-[Example screenshot of the data (anonymised)](https://photos.app.goo.gl/ZRSv9wF7wC5GfAJu8)
+[Example screenshot of the data (anonymized)](https://photos.app.goo.gl/ZRSv9wF7wC5GfAJu8)
